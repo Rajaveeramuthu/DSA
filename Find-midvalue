@@ -1,0 +1,55 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.next = null;
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter the number of nodes: ");
+        int n = scanner.nextInt();
+
+        if (n <= 0) {
+            System.out.println("List must contain at least one node.");
+            return;
+        }
+
+        // Input values and build linked list
+        System.out.print("Enter " + n + " integer values: ");
+        int value = scanner.nextInt();
+        Node head = new Node(value);
+        Node current = head;
+
+        for (int i = 1; i < n; i++) {
+            value = scanner.nextInt();
+            current.next = new Node(value);
+            current = current.next;
+        }
+
+        Node mid = findMiddle(head);
+        if (mid != null) {
+            System.out.println("Mid value: " + mid.data);
+        }
+    
+        scanner.close();
+    }
+
+    public static Node findMiddle(Node head) {
+        Node slow = head;
+        Node fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        return slow;
+    }
+}
