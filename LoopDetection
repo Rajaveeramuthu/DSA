@@ -1,0 +1,53 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+    }
+}
+
+public class Main {
+    
+    public static boolean detectLoop(Node head) {
+        Node slow = head, fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast)
+                return true;
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+      
+        System.out.print("Enter 3 numbers: ");
+        Node head = new Node(sc.nextInt());
+        head.next = new Node(sc.nextInt());
+        head.next.next = new Node(sc.nextInt());
+
+        
+        System.out.print("Do you want to create a loop? (yes/no): ");
+        String choice = sc.next();
+
+        if (choice.equalsIgnoreCase("yes")) {
+            head.next.next.next = head; // creates loop back to head
+        }
+
+        
+        if (detectLoop(head)) {
+            System.out.println("Loop detected.");
+        } else {
+            System.out.println("No loop.");
+        }
+
+        sc.close();
+    }
+}
