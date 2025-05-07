@@ -1,0 +1,178 @@
+
+class Node {
+    int data;
+    Node prev;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+// Doubly linked list class
+class DoublyLinkedList {
+    Node head;
+    public void append(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+
+        Node temp = head;
+        while (temp.next != null)
+            temp = temp.next;
+
+        temp.next = newNode;
+        newNode.prev = temp;
+    }
+
+
+    public void reverse() {
+        Node temp = null;
+        Node current = head;
+
+        while (current != null) {
+            temp = current.prev;
+            current.prev = current.next;
+            current.next = temp;
+            current = current.prev;
+        }
+
+        // Adjust head
+        if (temp != null) {
+            head = temp.prev;
+        }
+    }
+
+    // Display the list
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+}
+
+
+public class ReverseDLL {
+    public static void main(String[] args) {
+        DoublyLinkedList dll = new DoublyLinkedList();
+
+        dll.append(10);
+        dll.append(20);
+        dll.append(30);
+        dll.append(40);
+        dll.append(50);
+
+        System.out.println("Original List:");
+        dll.display();
+
+        dll.reverse();
+
+        System.out.println("Reversed List:");
+        dll.display();
+    }
+}
+
+//using scanner class//
+
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node prev;
+    Node next;
+
+    Node(int data) {
+        this.data = data;
+        this.prev = null;
+        this.next = null;
+    }
+}
+
+
+class DoublyLinkedList {
+    Node head;
+
+    public void append(int data) {
+        Node newNode = new Node(data);
+
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+
+        Node temp = head;
+        while (temp.next != null)
+            temp = temp.next;
+
+        temp.next = newNode;
+        newNode.prev = temp;
+    }
+
+    public void reverse() {
+        Node temp = null;
+        Node current = head;
+
+        while (current != null) {
+            temp = current.prev;
+            current.prev = current.next;
+            current.next = temp;
+            current = current.prev;
+        }
+
+        if (temp != null)
+            head = temp.prev;
+    }
+
+
+    public void display() {
+        Node temp = head;
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+}
+ class ReverseDLL {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        DoublyLinkedList dll = new DoublyLinkedList();
+
+        System.out.print("Enter number of elements: ");
+        int n = scanner.nextInt();
+
+        System.out.println("Enter " + n + " elements:");
+        for (int i = 0; i < n; i++) {
+            int value = scanner.nextInt();
+            dll.append(value);
+        }
+
+        System.out.println("\nOriginal List:");
+        dll.display();
+
+        dll.reverse();
+
+        System.out.println("Reversed List:");
+        dll.display();
+
+        scanner.close();
+    }
+}
+
+
+-------------------------output-------------------
+Enter number of elements: 3
+Enter 3 elements:
+10 20 30
+
+Original List:
+10 20 30
+Reversed List:
+30 20 10
