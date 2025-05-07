@@ -1,0 +1,70 @@
+import java.util.Scanner;
+
+class Node {
+    int data;
+    Node prev;
+    Node next;
+
+    public Node(int data) {
+        this.data = data;
+        this.prev=null;
+        this.next=null;
+    }
+}
+
+class DoublyLinkedList {
+    Node head;
+
+    // Insert at end
+    void insert(int data) {
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
+            return;
+        }
+        Node temp = head;
+        while (temp.next != null)
+            temp = temp.next;
+
+        temp.next = newNode;
+        newNode.prev = temp;
+    }
+
+    // Display forward
+    void display() {
+        Node temp = head;
+        System.out.print("List: ");
+        while (temp != null) {
+            System.out.print(temp.data + " ");
+            temp = temp.next;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        DoublyLinkedList list = new DoublyLinkedList();
+
+        System.out.print("How many numbers to insert ? ");
+        int n = sc.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            System.out.print("Enter number: ");
+            int value = sc.nextInt();
+            list.insert(value);
+        }
+
+        list.display();
+        sc.close();
+    }
+}
+
+
+-----------------output----------------
+
+
+  How many numbers to insert? 3
+Enter number: 1
+Enter number: 2
+Enter number: 3
+List: 1 2 3 
